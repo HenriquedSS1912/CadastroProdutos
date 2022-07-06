@@ -1,0 +1,47 @@
+﻿@model List<Product>
+
+<div>
+    <h3>Produtos</h3>
+    <div class="btn-toolbar mb-5">
+        <a href="~/product/detail/" class="btn btn-primary">Adicionar</a>
+    </div>
+    @if (Model != null)
+    {
+        <table class="table table-hover">
+            <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>PREÇO</th>
+                <th>DATA</th>
+                <th>CATEGORIA</th>
+                <th>CORES</th>
+            </tr>
+            @foreach (var product in Model)
+            {
+                <tbody data-link="row" class="rowLink">
+                    <tr onclick="window.location.assign('product/detail?id=@product.Id');"> 
+                        <td>@product.Id</td>
+                        <td>@product.Nome</td>
+                        <td>@product.Preco.ToString("C")</td>
+                        <td>@product.Data.ToString("d")</td>   
+                        <td>@product.CategoryId</td>
+                        <td>
+                            @foreach (var item in product.Cores)
+                            {
+                                <div style="width:20px; height:20px; background-color: @item; border-radius: 50%; margin-left: 15px"></div>
+                            }
+                        </td>
+                    </tr
+                </tbody>
+            }
+
+        </table>
+    }
+    else
+    {
+        <div>
+            <span class="alert alert-info"> Nenhum produto encontrado</span>
+        </div>
+    }
+
+</div>

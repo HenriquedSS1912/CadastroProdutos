@@ -1,0 +1,32 @@
+﻿@model List<Category>
+
+<div>
+    <h3>Categoria</h3>
+    <div class="btn-toolbar" style="margin-bottom: 30px;">
+        <a href="~/category/detail/" class="btn btn-primary">Adicionar</a>
+    </div>
+    @if (Model != null)
+    {
+        <table class="table">
+            <tr>
+                <th>NOME</th>
+            </tr>
+            @foreach (var category in Model)
+            {
+                <tbody data-link="row" class="row-link">
+                    <tr onclick="window.location.assign('category/detail/@category.Id');">
+                        <td>@category.Nome</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    }
+    else
+    {
+        <div>
+            <span class="alert alert-info"> Nenhuma categoria encontrada</span>
+        </div>
+    }
+
+</div>
+

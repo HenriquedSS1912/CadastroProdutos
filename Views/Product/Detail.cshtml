@@ -1,0 +1,46 @@
+﻿@model Product
+
+<h3>@(Model.Id != 0 ? "Editar" : "Adicionar Produto")</h3>
+<form action="/product/create" method="post">
+    <input type="hidden" name="Id" class="form-control" value="@Model.Id" />
+    <div>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" name="Nome" class="form-control" value="@Model.Nome" />
+
+                    <label>Preço</label>
+                    <input type="number" name="Preco" class="form-control" value="@Model.Preco" />
+
+                    <label>Data</label>
+                    <input type="date" name="Data" class="form-control" value="@Model.Data.ToString("yyyy-MM-dd")" />
+
+                    <label>Categoria</label>
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control required" })
+
+                    @if (Model.Id != 0)
+                    {
+                        @foreach (var item in Model.Cores)
+                        {
+                            <label>Cor</label>
+                            <input type="color" name="Cores" class="form-control" value="@item" style="margin-bottom:15px" />
+                        }
+                    }
+                    else
+                    {
+                        <label>Cor</label>
+                        <input type="color" name="Cores" class="form-control" value="@Model.Cores" />
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-toolbar">
+            <button type="submit" class="btn btn-primary" style="margin-right:10px;">Salvar</button>
+            <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-danger">Remover</a>
+        </div>
+    </div>
+</form>
+
+
